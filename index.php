@@ -1,41 +1,30 @@
 <!DOCTYPE html>
-<html lang="et">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harjutused 1-14 ja Iseseisvad 1-4</title>
+    <title>Harj10</title>
 </head>
 <body>
-    <h1>Harjutused 1-14</h1>
     <ul>
-        <?php
-        // Loop through numbers 1 to 14 to generate links
-        for ($i = 1; $i <= 14; $i++) {
-            if ($i == 10) {
-                $link = "https://liivakast.hkhk.edu.ee/~mpilv/php/Harj10/index.php";
-            } elseif ($i == 12) {
-                $link = "https://liivakast.hkhk.edu.ee/~mpilv/php/Harj12/harj12.php";
-            } elseif ($i == 13) {
-                $link = "https://liivakast.hkhk.edu.ee/~mpilv/php/Harj13/harj13.php";
-            } elseif ($i == 14) {
-                $link = "https://liivakast.hkhk.edu.ee/~mpilv/php/Harj13/harj14.php";
-            } else {
-                $link = "https://liivakast.hkhk.edu.ee/~mpilv/php/harj{$i}.php";
-            }
-            echo "<li><a href='{$link}'>Harjutus {$i}</a></li>";
-        }
-        ?>
-    </ul>
+        <li><a href="index.php?leht=1">Leht 1</a></li>
+        <li><a href="index.php?leht=2">Leht 2</a></li>
+        <li><a href="index.php?leht=3">Leht 3</a></li>
+	<li><a href="index.php?leht=4">Leht 4</a></li>
 
-    <h1>Iseseisvad Harjutused 1-4</h1>
-    <ul>
+    </ul>
+    <div id="sisu">
         <?php
-        // Loop through numbers 1 to 4 to generate links for independent exercises
-        for ($i = 1; $i <= 4; $i++) {
-            $link = "https://liivakast.hkhk.edu.ee/~mpilv/php/iseseisvad/{$i}.php";
-            echo "<li><a href='{$link}'>Iseseisev {$i}</a></li>";
+        if (!empty($_GET['leht'])) {
+            $leht = htmlspecialchars($_GET['leht']);
+            $lubatud = array('1', '2', '3');
+            if (in_array($leht, $lubatud)) {
+                include('leht'.$leht.'.php');
+            } else {
+                echo 'Valitud lehte ei eksisteeri!';
+            }
+        } else {
+            echo 'Vali leht menüüst.';
         }
         ?>
-    </ul>
+    </div>
 </body>
 </html>
